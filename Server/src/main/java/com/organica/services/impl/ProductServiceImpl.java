@@ -56,8 +56,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAll(){
-        return this.productRepo.findAll();
+    public List<ProductDto> getAll(){
+        List<Product> all = this.productRepo.findAll();
+
+
+        return all.stream().map(dto -> new ProductDto(dto.getProductId(), dto.getProductName(), dto.getDescription(), dto.getPrice(), dto.getWeight(), decompressBytes(dto.getImg()))).collect(Collectors.toList());
     }
     //Read All
     @Override

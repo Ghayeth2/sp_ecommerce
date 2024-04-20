@@ -53,10 +53,10 @@ public class ContentBasedRecommendation {
     }
 
     public List<RecommenderDto> findSimilarProducts(String queryDescription) {
-        List<Product> allProducts = productService.getAll();
+        List<ProductDto> allProducts = productService.getAll();
         Vector queryVector = convertToVector(queryDescription);
         List<RecommenderDto> similarProducts = new ArrayList<>();
-        for (Product product : allProducts) {
+        for (ProductDto product : allProducts) {
             Vector productVector = convertToVector(product.getDescription());
             double similarity = calculateCosineSimilarity(queryVector, productVector);
             RecommenderDto productDto = RecommenderDto.builder()

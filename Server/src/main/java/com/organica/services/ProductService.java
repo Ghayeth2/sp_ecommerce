@@ -20,7 +20,7 @@ public interface ProductService {
 
     //readAll
     Page<Product> ReadAllProduct(Pageable pageable);
-    List<Product> getAll();
+    List<ProductDto> getAll();
     List<RecommenderDto> findSimilarProducts(String queryDescription);
 
 

@@ -3,6 +3,7 @@ package com.organica.controllers;
 import com.organica.entities.Product;
 import com.organica.payload.ApiResponse;
 import com.organica.payload.ProductDto;
+import com.organica.repositories.ProductRepo;
 import com.organica.services.ProductService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class ProductControllers {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductRepo productRepo;
     //Create Product
     @PostMapping(value = "/add" )
     public ResponseEntity<ProductDto> CreateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestParam("img") MultipartFile file) throws IOException {
@@ -51,11 +54,19 @@ public class ProductControllers {
 
     //Get All Product
     @GetMapping("")
-    public ResponseEntity<Page<Product>> getAll(Pageable pageable){
-        log.info("PRODUCT CONTROLLER >> getAll METHOD");
-        Page<Product> products = this.productService.ReadAllProduct(pageable);
+    public ResponseEntity<List<Product>> getAll(Pageable pageable){
+        log.info("page size & number "+pageable.getPageNumber()+" "+pageable.getPageSize());
 
-        return new ResponseEntity<>(products,HttpStatusCode.valueOf(200));
+        Page<Product> products = this.productService.ReadAllProduct(pageable);
+        log.info("products of paging :"+products);
+        List<Product> productsList = products.getContent();
+
+        return new ResponseEntity<>(productsList,HttpStatusCode.valueOf(200));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Product>> products(){
+        return new ResponseEntity<>(productRepo.findAll(), HttpStatusCode.valueOf(200));
     }
 
 
