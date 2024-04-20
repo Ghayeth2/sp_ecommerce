@@ -18,14 +18,12 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/review")
-@Log4j2
 public class ReviewController {
     @Autowired
     private ReviewRepo reviewRepo;
 
     @GetMapping("/{product_id}")
     public ResponseEntity<List<Review>> productReviews(@PathVariable("product_id") int product_id) {
-        log.info("list : "+reviewRepo.findAllReviewsByProductId(product_id));
         return ResponseEntity.status(HttpStatus.OK).body(reviewRepo.findAllReviewsByProductId(product_id));
     }
 

@@ -1,11 +1,14 @@
 package com.organica.config;
 
 
+import com.organica.repositories.ProductRepo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Service
+@Service @Log4j2
 public class JwtService {
+    @Autowired private ProductRepo productRepo;
+    public void doNothing(){
+        log.info("jwt list products: "+productRepo.findAll());
+    }
 
     private final String KEY="822c4707919bf892c76ad2769465cb794993931a98ec939e6e492c5317fb95e7";
 

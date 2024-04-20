@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class Product {
     @Column
     private String productName;
 
+//    @Column(columnDefinition = "TEXT")
     private String description;
     private Float price;
     private Float weight;

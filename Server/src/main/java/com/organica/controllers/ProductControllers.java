@@ -1,9 +1,13 @@
 package com.organica.controllers;
 
+import com.organica.entities.Product;
 import com.organica.payload.ApiResponse;
 import com.organica.payload.ProductDto;
 import com.organica.services.ProductService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
@@ -14,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin @Log4j2
 @RequestMapping("/product")
 public class ProductControllers {
 
@@ -38,6 +42,7 @@ public class ProductControllers {
     //Get by Id
     @GetMapping("/{productid}")
     public ResponseEntity<ProductDto> GetById(@PathVariable Integer productid){
+        log.info("Prdouct controller >>> GetById <<< METHOD");
         ProductDto product = this.productService.ReadProduct(productid);
 
         return new ResponseEntity<>(product,HttpStatusCode.valueOf(200));
@@ -45,9 +50,10 @@ public class ProductControllers {
 
 
     //Get All Product
-    @GetMapping("/")
-    public ResponseEntity<List<ProductDto>> getAll(){
-        List<ProductDto> products = this.productService.ReadAllProduct();
+    @GetMapping("")
+    public ResponseEntity<Page<Product>> getAll(Pageable pageable){
+        log.info("PRODUCT CONTROLLER >> getAll METHOD");
+        Page<Product> products = this.productService.ReadAllProduct(pageable);
 
         return new ResponseEntity<>(products,HttpStatusCode.valueOf(200));
     }

@@ -16,4 +16,8 @@ public class ProductDto {
     private Float Price;
     private Float Weight;
     private byte[] Img;
+
+    public int getProductId() {
+        return Productid;
+    }
 }
