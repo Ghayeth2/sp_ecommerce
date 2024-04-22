@@ -28,8 +28,8 @@ public class ReviewController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody ReviewDto reviewDto, Principal principal){
-        String userEmail = principal.getName();
+    public ResponseEntity<?> save(@RequestBody ReviewDto reviewDto){
+//        String userEmail = principal.getName();
         Product product = new Product();
         product.setProductId(reviewDto.getProductId());
 

@@ -6,6 +6,7 @@ import com.organica.config.Test;
 import com.organica.payload.RecommenderDto;
 import com.organica.services.PaymentService;
 import com.organica.services.ProductService;
+import com.organica.services.RecommenderService;
 import com.organica.services.impl.PaymentServiceImpl;
 import com.organica.services.impl.ProductServiceImpl;
 import lombok.extern.log4j.Log4j2;
@@ -19,15 +20,17 @@ import java.util.List;
 @Log4j2
 @RequestMapping("/recommendations")
 public class RecommendationController {
-    @Autowired private PaymentService paymentService;
+    @Autowired private RecommenderService recommenderService;
 
     @Autowired private ProductService productService;
 
     @GetMapping("/generate")
     public ResponseEntity<List<RecommenderDto>> recommendProducts(@RequestParam String desc) {
-        List<RecommenderDto> recommendedProducts = productService.findSimilarProducts(desc);
 
-        return ResponseEntity.ok(recommendedProducts);
+        List<RecommenderDto> recommendations = recommenderService.filterRecommenderList(
+                productService.findSimilarProducts(desc));
+
+        return ResponseEntity.ok(recommendations);
 //        return null;
     }
 }

@@ -5,6 +5,7 @@ import com.organica.payload.ApiResponse;
 import com.organica.payload.ProductDto;
 import com.organica.repositories.ProductRepo;
 import com.organica.services.ProductService;
+import com.organica.services.impl.ProductServiceImpl;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin @Log4j2
@@ -45,7 +47,6 @@ public class ProductControllers {
     //Get by Id
     @GetMapping("/{productid}")
     public ResponseEntity<ProductDto> GetById(@PathVariable Integer productid){
-        log.info("Prdouct controller >>> GetById <<< METHOD");
         ProductDto product = this.productService.ReadProduct(productid);
 
         return new ResponseEntity<>(product,HttpStatusCode.valueOf(200));
@@ -61,7 +62,13 @@ public class ProductControllers {
         log.info("products of paging :"+products);
         List<Product> productsList = products.getContent();
 
-        return new ResponseEntity<>(productsList,HttpStatusCode.valueOf(200));
+        List<Product> collect = productsList.stream().map(dto -> new Product(dto.getProductId(), dto.getProductName(),
+                dto.getDescription(), dto.getPrice(), dto.getWeight(),
+                ProductServiceImpl.decompressBytes(dto.getImg()))).collect(Collectors.toList());
+
+
+
+        return new ResponseEntity<>(collect,HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/getAll")

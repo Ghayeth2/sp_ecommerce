@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -17,6 +15,7 @@ import java.util.stream.Collectors;
 @Entity
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -31,6 +30,15 @@ public class Product {
     private Float weight;
     @Column(length = 65555)
     private byte[] img;
+
+    public Product(int productId, String productName, String description, Float price, Float weight, byte[] img) {
+        this.productId = productId;
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.weight = weight;
+        this.img = img;
+    }
 
     @Override
     public String toString() {
@@ -47,6 +55,7 @@ public class Product {
                 + ", price='" + getPrice() + "'"
                 + ", weight='" + getWeight() + "'"
                 + ", description='" + getDescription() + "'"
+                + ", img='" + getImg() + "'"
                 + ", list=" + shortCustomersToString + "}";
     }
 
