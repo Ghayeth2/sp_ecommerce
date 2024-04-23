@@ -63,7 +63,7 @@ export const ProductDetails = () => {
 
     };
     const handleReview = async () => {
-        console.log(ProductDetails+" "+id);
+        console.log(ProductDetails + " " + id);
         const res = await fetch(
             `http://localhost:9090/review`,
             {
@@ -133,7 +133,8 @@ export const ProductDetails = () => {
                                                 <p>Rating: {ProductDetails}</p>
                                                 <button className="button btn-primary"
                                                         onClick={() => handleReview()}
-                                                >Send your rate</button>
+                                                >Send your rate
+                                                </button>
                                             </div>
                                         </div>
 
@@ -143,26 +144,9 @@ export const ProductDetails = () => {
                                         </div>
                                     </div>
                                     <p>
-                                        {data.productDescription}
+                                        {data.description}
                                     </p>
                                     <div className="row">
-                                        {/* <div className="col-md-6">
-                <label htmlFor="size">Size</label>
-                <select id="size" name="size" className="form-control">
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                </select>
-              </div> */}
-                                        {/* <div className="col-md-6">
-                <label htmlFor="color">Color</label>
-                <select id="color" name="color" className="form-control">
-                  <option>Blue</option>
-                  <option>Green</option>
-                  <option>Red</option>
-                </select>
-              </div> */}
                                     </div>
                                     <div className="product-count">
                                         <label htmlFor="size">Quantity</label>
@@ -188,6 +172,45 @@ export const ProductDetails = () => {
 
                     </div>
                 </div>
+                {/*recommendProduct*/}
+                <div className="container-fluid py-5">
+                    <div className="text-center mb-">
+                        <h2 className="section-title px-5"><span className="px-2">Recommend Products</span></h2>
+                    </div>
+
+                    <div className="row">
+                        <div className="col">
+                            <div className="owl-carousel related-carousel d-flex justify-content-between">
+
+                                <div className="card product-item border-0">
+                                    <div
+                                        className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                        <img className="img-fluid w-100" src="img/product-2.jpg" alt=""/>
+                                    </div>
+                                    <div className="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                        <h6 className="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                                        <div className="d-flex justify-content-center">
+                                            <h6>$123.00</h6>
+                                            <h6 className="text-muted ml-2">
+                                                <del>$123.00</del>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div className="card-footer d-flex justify-content-between ">
+                                        <a href="" className=" btn btn-sm p-2"><i
+                                            className="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                                        <a href="" className="btn btn-sm p-2"><i
+                                            className="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/*recommendProduct*/}
+
+
                 <Footer/>
             </>
 

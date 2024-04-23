@@ -69,7 +69,7 @@ export const ProductCard = (props) => {
               </button>
               <button
                 className="product-btn"
-                onClick={() => handalClick(props.id)}
+
                 aria-label="Quick View"
               >
                 <ion-icon name="eye-outline" />
@@ -85,7 +85,9 @@ export const ProductCard = (props) => {
             <ion-icon name="star" />
           </div>
           <h3 className="h4 card-title">
-            <a href="/product/1">{props.name}</a>
+            <a href=""
+               onClick={() => handalClick(props.id)}
+            >{props.name}</a>
           </h3>
           <div className="price-wrapper">
             <del className="del">Rs {props.price+100}</del>
