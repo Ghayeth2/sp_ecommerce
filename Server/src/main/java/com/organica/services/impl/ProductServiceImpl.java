@@ -178,10 +178,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public List<RecommenderDto> findSimilarProducts(String queryDescription) {
-        log.info("product: "+productRepo.findById(3).get());
-        log.info("Desc from Recommender: "+queryDescription);
         List<Product> allProducts = productRepo.findAll();
-        log.info("list of products: " + allProducts);
         Vector queryVector = convertToVector(queryDescription);
         List<RecommenderDto> similarProducts = new ArrayList<>();
         for (Product product : allProducts) {

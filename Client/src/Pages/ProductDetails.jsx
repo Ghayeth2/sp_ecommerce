@@ -4,15 +4,21 @@ import {Footer} from '../Component/Footer'
 import {useParams} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {Rate} from "./Rate";
+import {ProductCard} from "../Component/ShopComponent/ProductCard";
+import axiosFetch from "../Helper/Axios";
 
 export const ProductDetails = () => {
     // ProductDetails = Rating
     const [ProductDetails, setProductDetails] = useState(0);
     const [data, setData] = useState([]);
+    const[recommendations,setRecommendations]=useState([]);
+
     const [quantity, setQuantity] = useState(1);
     const [token, setToken] = useState(sessionStorage.getItem("token"));
 
     const {id} = useParams();
+
+
 
     const handleQuantity = (e) => {
         setQuantity(e.target.value);
@@ -83,7 +89,6 @@ export const ProductDetails = () => {
             onToast();
         }
 
-
     };
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -101,6 +106,23 @@ export const ProductDetails = () => {
         fatchData();
     }, []);
 
+    const fetchRecommendations = async () => {
+        const url = `recommendations/generate?desc=${data.description}`;
+        console.log("Description sent to backend: "+data.description)
+        const response = await axiosFetch({
+            url: url,
+            method: 'GET',
+        });
+
+        // const
+        console.log("Recommendations : "+response.data);
+        setRecommendations(response.data);
+    };
+
+    useEffect(() => {
+        fetchRecommendations();
+    }, []);
+
 
     return (
         <>
@@ -109,10 +131,6 @@ export const ProductDetails = () => {
                 <Header/>
                 <div className="pd-wrap">
                     <div className="container">
-                        {/* <div className="heading-section">
-        <h2>Product Details</h2>
-      </div> */}
-                        {console.log(data.img)}
                         <div className="row">
                             <div className="col-md-6 d-flex justify-content-center">
                                 {!data.img ? <></> : <img className='productimg' width="167"
@@ -182,27 +200,41 @@ export const ProductDetails = () => {
                         <div className="col">
                             <div className="owl-carousel related-carousel d-flex justify-content-between">
 
-                                <div className="card product-item border-0">
-                                    <div
-                                        className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        <img className="img-fluid w-100" src="img/product-2.jpg" alt=""/>
-                                    </div>
-                                    <div className="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                        <h6 className="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                                        <div className="d-flex justify-content-center">
-                                            <h6>$123.00</h6>
-                                            <h6 className="text-muted ml-2">
-                                                <del>$123.00</del>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                    <div className="card-footer d-flex justify-content-between ">
-                                        <a href="" className=" btn btn-sm p-2"><i
-                                            className="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                        <a href="" className="btn btn-sm p-2"><i
-                                            className="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                                    </div>
-                                </div>
+                                {recommendations.map((item) =>
+
+                                    <ProductCard  key={item.productId}
+                                                  id={item.productId}
+                                                  name={item.productName}
+                                                  description={item.description}
+                                                  price={item.price}
+                                                  img={item.img}
+                                    />
+
+
+
+                                )}
+
+                                {/*<div className="card product-item border-0">*/}
+                                {/*    <div*/}
+                                {/*        className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">*/}
+                                {/*        <img className="img-fluid w-100" src="img/product-2.jpg" alt=""/>*/}
+                                {/*    </div>*/}
+                                {/*    <div className="card-body border-left border-right text-center p-0 pt-4 pb-3">*/}
+                                {/*        <h6 className="text-truncate mb-3">Colorful Stylish Shirt</h6>*/}
+                                {/*        <div className="d-flex justify-content-center">*/}
+                                {/*            <h6>$123.00</h6>*/}
+                                {/*            <h6 className="text-muted ml-2">*/}
+                                {/*                <del>$123.00</del>*/}
+                                {/*            </h6>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*    <div className="card-footer d-flex justify-content-between ">*/}
+                                {/*        <a href="" className=" btn btn-sm p-2"><i*/}
+                                {/*            className="fas fa-eye text-primary mr-1"></i>View Detail</a>*/}
+                                {/*        <a href="" className="btn btn-sm p-2"><i*/}
+                                {/*            className="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>

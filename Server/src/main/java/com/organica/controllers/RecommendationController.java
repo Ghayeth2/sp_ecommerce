@@ -26,10 +26,10 @@ public class RecommendationController {
 
     @GetMapping("/generate")
     public ResponseEntity<List<RecommenderDto>> recommendProducts(@RequestParam String desc) {
-
+        log.info("Calling this function : desc "+desc);
         List<RecommenderDto> recommendations = recommenderService.filterRecommenderList(
                 productService.findSimilarProducts(desc));
-
+        log.info("Returned data : recommendations "+recommendations);
         return ResponseEntity.ok(recommendations);
 //        return null;
     }
