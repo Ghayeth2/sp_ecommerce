@@ -8,7 +8,7 @@ export const ListProduct = () => {
     const [data, setData] = useState([]);
     const fatchData = async () => {
         const page = 0; // Specify the page number you want
-        const size = 15; // Specify the page size
+        const size = 42; // Specify the page size
         const url = `product?page=${page}&size=${size}`;
 
         const response = await axiosFetch({

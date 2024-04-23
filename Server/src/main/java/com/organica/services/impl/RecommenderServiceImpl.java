@@ -19,7 +19,7 @@ public class RecommenderServiceImpl implements RecommenderService {
 
         for (RecommenderDto product : recommenders) {
             List<Review> reviews = reviewService.findAllByProductId(product.getProductId());
-            if (reviews.size() >= 5) {
+            if (reviews.size() >= 10) {
                 double averageRating = calculateAverageRating(reviews);
                 if (averageRating >= 2.25) {
                     chosenProducts.add(product);

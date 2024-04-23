@@ -11,13 +11,12 @@ export const ProductDetails = () => {
     // ProductDetails = Rating
     const [ProductDetails, setProductDetails] = useState(0);
     const [data, setData] = useState([]);
-    const[recommendations,setRecommendations]=useState([]);
+    const [recommendations, setRecommendations] = useState([]);
 
     const [quantity, setQuantity] = useState(1);
     const [token, setToken] = useState(sessionStorage.getItem("token"));
 
     const {id} = useParams();
-
 
 
     const handleQuantity = (e) => {
@@ -90,38 +89,47 @@ export const ProductDetails = () => {
         }
 
     };
-    useEffect(() => {
-        window.scrollTo(0, 0)
 
-        const fatchData = async () => {
-            const response = await fetch(`http://localhost:9090/product/${id}`, {
-                headers: {
-                    "Authorization": "Bearer " + token
-                },
-            });
-
-            const res = await response.json();
-            setData(res);
-        }
-        fatchData();
-    }, []);
-
-    const fetchRecommendations = async () => {
-        const url = `recommendations/generate?desc=${data.description}`;
-        console.log("Description sent to backend: "+data.description)
-        const response = await axiosFetch({
-            url: url,
-            method: 'GET',
+    const fatchData = async () => {
+        const response = await fetch(`http://localhost:9090/product/${id}`, {
+            headers: {
+                "Authorization": "Bearer " + token
+            },
         });
 
-        // const
-        console.log("Recommendations : "+response.data);
-        setRecommendations(response.data);
+        const res = await response.json();
+        setData(res)
+    }
+
+    const fetchRecommendations = async () => {
+        if (!data || !data.description) {
+            // Exit early if data or description is not available yet
+            return;
+        }
+
+        const url = `recommendations/generate?desc=${data.description}`;
+        console.log("Description sent to backend: " + data.description);
+
+        try {
+            const response = await axiosFetch({
+                url: url,
+                method: 'GET',
+            });
+
+            console.log("Recommendations : " + response.data);
+            setRecommendations(response.data);
+        } catch (error) {
+            console.error("Error fetching recommendations:", error);
+        }
     };
 
     useEffect(() => {
-        fetchRecommendations();
+        fatchData();
     }, []);
+
+    useEffect(() => {
+        fetchRecommendations();
+    }, [data]); // Trigger fetchRecommendations whenever data changes
 
 
     return (
@@ -202,16 +210,13 @@ export const ProductDetails = () => {
 
                                 {recommendations.map((item) =>
 
-                                    <ProductCard  key={item.productId}
-                                                  id={item.productId}
-                                                  name={item.productName}
-                                                  description={item.description}
-                                                  price={item.price}
-                                                  img={item.img}
+                                    <ProductCard key={item.productId}
+                                                 id={item.productId}
+                                                 name={item.productName}
+                                                 description={item.description}
+                                                 price={item.price}
+                                                 img={item.img}
                                     />
-
-
-
                                 )}
 
                                 {/*<div className="card product-item border-0">*/}
