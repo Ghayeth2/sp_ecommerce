@@ -53,9 +53,7 @@ export const ProductCard = (props) => {
         <div className="product-card">
           <figure className="card-banner">
             <img
-              // src="./images/product-1.png"
-              src={`data:image/png;base64,${props.img}`}
-              // src={base64Image}
+              src={props.img}
 
               width={189}
               height={189}

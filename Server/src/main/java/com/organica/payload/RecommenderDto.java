@@ -14,6 +14,6 @@ public class RecommenderDto {
     private String description;
     private Float price;
     private Float weight;
-    private byte[] img;
+    private String img;
     private Double similarity;
 }

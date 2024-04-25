@@ -8,16 +8,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ToString
-public class ProductDto {
+public class ProductDtoPost {
     private int Productid;
     private String ProductName;
     private String Description;
     private Float Price;
     private Float Weight;
-    private String Img;
-
-    public int getProductId() {
-        return Productid;
-    }
+    private byte[] Img;
 }

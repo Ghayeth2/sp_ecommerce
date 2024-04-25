@@ -142,7 +142,7 @@ export const ProductDetails = () => {
                         <div className="row">
                             <div className="col-md-6 d-flex justify-content-center">
                                 {!data.img ? <></> : <img className='productimg' width="167"
-                                                          height="250" src={`data:image/png;base64,${data.img}`}
+                                                          height="250" src={data.img}
                                                           alt="Product Image"/>}
                             </div>
                             <div className="col-md-6">

@@ -2,6 +2,7 @@ package com.organica.services.impl;
 
 import com.organica.entities.Product;
 import com.organica.payload.ProductDto;
+import com.organica.payload.ProductDtoPost;
 import com.organica.payload.RecommenderDto;
 import com.organica.repositories.ProductRepo;
 import com.organica.services.ProductService;
@@ -13,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,25 +34,31 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepo productRepo;
 
+    private final String DB_PATH = "D:\\Java\\sp\\galleries\\images";
 
 
     //Create
     @Override
-    public ProductDto CreateProduct(ProductDto productDto) {
+    public ProductDto CreateProduct(ProductDto productDto, MultipartFile file) throws IOException {
         Product product=this.modelMapper.map(productDto,Product.class);
-        product.setImg(compressBytes(product.getImg()));
+//        product.setImg(compressBytes(product.getImg()));
+        // Saving image into File System
+        String filePath = DB_PATH + file.getOriginalFilename();
+        file.transferTo(new File(filePath));
+
+        // Set the image path to the product
+        product.setImg(filePath);
 
         Product save = this.productRepo.save(product);
-        save.setImg(null);
+//        save.setImg(null);
         return this.modelMapper.map(save,ProductDto.class);
     }
 
     //Read One
     @Override
     public ProductDto ReadProduct(Integer ProductId) {
-        log.info("product service >>> ReadProduct <<< METHOD");
         Product save = this.productRepo.findById(ProductId).orElseThrow();
-        save.setImg(decompressBytes(save.getImg()));
+//        save.setImg(decompressBytes(save.getImg()));
 
 
         return this.modelMapper.map(save,ProductDto.class);
@@ -60,21 +69,17 @@ public class ProductServiceImpl implements ProductService {
         List<Product> all = this.productRepo.findAll();
 
 
-        return all.stream().map(dto -> new ProductDto(dto.getProductId(), dto.getProductName(), dto.getDescription(), dto.getPrice(), dto.getWeight(), decompressBytes(dto.getImg()))).collect(Collectors.toList());
+        return all.stream().map(dto -> new ProductDto(dto.getProductId(),
+                dto.getProductName(),
+                dto.getDescription(),
+                dto.getPrice(),
+                dto.getWeight(),
+                dto.getImg())).collect(Collectors.toList());
     }
     //Read All
     @Override
     public Page<Product> ReadAllProduct(Pageable pageable) {
         return this.productRepo.findAll(pageable);
-
-        /*
-        Perhaps fixing images' issue is from returning the products
-        where i can see he created a function to get images' bytes which currently
-        is closed
-         */
-//        List<ProductDto> collect = all.stream().map(dto -> new ProductDto(dto.getProductId(), dto.getProductName(), dto.getDescription(), dto.getPrice(), dto.getWeight(), decompressBytes(dto.getImg()))).collect(Collectors.toList());
-//
-//        return collect;
     }
 
     //Delete

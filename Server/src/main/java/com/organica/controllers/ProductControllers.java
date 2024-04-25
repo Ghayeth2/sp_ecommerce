@@ -3,6 +3,7 @@ package com.organica.controllers;
 import com.organica.entities.Product;
 import com.organica.payload.ApiResponse;
 import com.organica.payload.ProductDto;
+import com.organica.payload.ProductDtoPost;
 import com.organica.repositories.ProductRepo;
 import com.organica.services.ProductService;
 import com.organica.services.impl.ProductServiceImpl;
@@ -10,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
@@ -37,9 +39,9 @@ public class ProductControllers {
         productDto.setDescription(formData.getFirst("description"));
         productDto.setWeight(Float.valueOf(formData.getFirst("weight")));
         productDto.setPrice(Float.valueOf(formData.getFirst("price")));
-        productDto.setImg(file.getBytes());
+//        productDto.setImg(file.getBytes());
 
-        ProductDto save = this.productService.CreateProduct(productDto);
+        ProductDto save = this.productService.CreateProduct(productDto, file);
 
         return new ResponseEntity<ProductDto>(save,HttpStatusCode.valueOf(200));
     }
@@ -56,21 +58,16 @@ public class ProductControllers {
     //Get All Product
     @GetMapping("")
     public ResponseEntity<List<Product>> getAll(Pageable pageable){
-        log.info("page size & number "+pageable.getPageNumber()+" "+pageable.getPageSize());
-
         Page<Product> products = this.productService.ReadAllProduct(pageable);
-        log.info("products of paging :"+products);
         List<Product> productsList = products.getContent();
 
+        // Convert image data before sending the response
         List<Product> collect = productsList.stream().map(dto -> new Product(dto.getProductId(), dto.getProductName(),
                 dto.getDescription(), dto.getPrice(), dto.getWeight(),
-                ProductServiceImpl.decompressBytes(dto.getImg()))).collect(Collectors.toList());
+                dto.getImg())).collect(Collectors.toList());
 
-
-
-        return new ResponseEntity<>(collect,HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(collect, HttpStatus.OK);
     }
-
     @GetMapping("/getAll")
     public ResponseEntity<List<Product>> products(){
         return new ResponseEntity<>(productRepo.findAll(), HttpStatusCode.valueOf(200));
@@ -87,19 +84,19 @@ public class ProductControllers {
 
 
     //Update Product
-    @PutMapping("/{ProductId}")
-    public ResponseEntity<ProductDto> UpdateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestParam("img") MultipartFile file,@PathVariable Integer ProductId) throws IOException {
-        ProductDto productDto = new ProductDto();
-        productDto.setProductName(formData.getFirst("productname"));
-        productDto.setDescription(formData.getFirst("description"));
-        productDto.setWeight(Float.valueOf(formData.getFirst("weight")));
-        productDto.setPrice(Float.valueOf(formData.getFirst("price")));
-        productDto.setImg(file.getBytes());
-
-        ProductDto save = this.productService.UpdateProduct(productDto,ProductId);
-
-        return new ResponseEntity<ProductDto>(save,HttpStatusCode.valueOf(200));
-    }
+//    @PutMapping("/{ProductId}")
+//    public ResponseEntity<ProductDto> UpdateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestParam("img") MultipartFile file,@PathVariable Integer ProductId) throws IOException {
+//        ProductDto productDto = new ProductDto();
+//        productDto.setProductName(formData.getFirst("productname"));
+//        productDto.setDescription(formData.getFirst("description"));
+//        productDto.setWeight(Float.valueOf(formData.getFirst("weight")));
+//        productDto.setPrice(Float.valueOf(formData.getFirst("price")));
+//        productDto.setImg(file.getBytes());
+//
+//        ProductDto save = this.productService.UpdateProduct(productDto,ProductId);
+//
+//        return new ResponseEntity<ProductDto>(save,HttpStatusCode.valueOf(200));
+//    }
 
 
 

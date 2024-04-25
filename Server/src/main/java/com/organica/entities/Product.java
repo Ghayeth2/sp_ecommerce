@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.w3c.dom.Text;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,17 +29,9 @@ public class Product {
     private String description;
     private Float price;
     private Float weight;
-    @Column(length = 65555)
-    private byte[] img;
-
-    public Product(int productId, String productName, String description, Float price, Float weight, byte[] img) {
-        this.productId = productId;
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-        this.weight = weight;
-        this.img = img;
-    }
+//    @Column(length = 65555)
+//    private byte[] img;
+    private String img;
 
     @Override
     public String toString() {
@@ -49,6 +42,9 @@ public class Product {
                     .collect(Collectors.joining(", ", "[", "]"));
         else
             shortCustomersToString = null;
+
+//        // Convert image data to base64-encoded string
+//        String imgBase64 = Base64.getEncoder().encodeToString(this.img);
 
         return "{" + " productId='" + getProductId() + "'"
                 + ", productName='" + getProductName() + "'"
@@ -67,4 +63,13 @@ public class Product {
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Review> reviews;
+
+    public Product(int productId, String productName, String description, Float price, Float weight, String img) {
+        this.productId = productId;
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.weight = weight;
+        this.img = img;
+    }
 }
