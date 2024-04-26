@@ -6,6 +6,8 @@ import {toast} from 'react-toastify';
 import {Rate} from "./Rate";
 import {ProductCard} from "../Component/ShopComponent/ProductCard";
 import axiosFetch from "../Helper/Axios";
+import './productDetiles.css'
+
 
 export const ProductDetails = () => {
     // ProductDetails = Rating
@@ -134,118 +136,85 @@ export const ProductDetails = () => {
 
     return (
         <>
-
+            <Header/>
             <>
-                <Header/>
                 <div className="pd-wrap">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-6 d-flex justify-content-center">
-                                {!data.img ? <></> : <img className='productimg' width="167"
-                                                          height="250" src={data.img}
+                            <div className="col-md-6 d-flex justify-content-center align-items-center">
+                                {!data.img ? <></> : <img className='productimg' width="700" height="700" src={data.img}
                                                           alt="Product Image"/>}
                             </div>
                             <div className="col-md-6">
                                 <div className="product-dtl">
                                     <div className="product-info">
-                                        <div className="product-name">{data.productName}</div>
-
-                                        <div className="row">
-                                            <div className="col tex-center">
-                                                <h2>Rate me</h2>
+                                        <h2 className="product-name">{data.productName}</h2>
+                                        <div className="row align-items-center">
+                                            <div className="col text-center">
+                                                <h3>Rate Me</h3>
                                                 <p>Rating component</p>
                                                 <Rate ProductDetails={ProductDetails}
                                                       onRating={(Rate) => setProductDetails(Rate)} count={5}></Rate>
                                                 <p>Rating: {ProductDetails}</p>
-                                                <button className="button btn-primary"
-                                                        onClick={() => handleReview()}
-                                                >Send your rate
+                                                <button className="btn btn-primary" onClick={handleReview}>Send your
+                                                    rate
                                                 </button>
                                             </div>
                                         </div>
-
                                         <div className="product-price-discount">
-                                            <span>Rs {data.price}</span>
-                                            <span className="line-through">Rs {data.price + 100}</span>
+                                            <p>Price: Rs {data.price}</p>
+                                            <p className="line-through">Discounted Price: Rs {data.price + 100}</p>
                                         </div>
                                     </div>
-                                    <p>
-                                        {data.description}
-                                    </p>
-                                    <div className="row">
-                                    </div>
+                                    <p>{data.description}</p>
                                     <div className="product-count">
-                                        <label htmlFor="size">Quantity</label>
-                                        <form action="#" className="display-flex">
-                                            <div className="qtyminus" onClick={() => handleMinus()}>-</div>
-                                            <input
-                                                type="text"
-                                                name="quantity"
-                                                onChange={(e) => handleQuantity(e)}
-                                                defaultValue={1}
-                                                value={quantity}
-                                                className="qty"
-                                            />
-                                            <div className="qtyplus" onClick={() => handlePlus()}>+</div>
-                                        </form>
-                                        <a className="round-black-btn" onClick={(quantity) => handleCart(quantity)}>
-                                            Add to Cart
-                                        </a>
+                                        <label htmlFor="quantity">Quantity</label>
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <button className="btn btn-outline-secondary" type="button"
+                                                        onClick={handleMinus}>-
+                                                </button>
+                                            </div>
+                                            <input type="text" name="quantity" onChange={handleQuantity}
+                                                   value={quantity} className="form-control qty"/>
+                                            <div className="input-group-append">
+                                                <button className="btn btn-outline-secondary" type="button"
+                                                        onClick={handlePlus}>+
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button className="btn btn-dark mt-3" onClick={handleCart}>Add to Cart</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
+
+
                 {/*recommendProduct*/}
                 <div className="container-fluid py-5">
-                    <div className="text-center mb-">
-                        <h2 className="section-title px-5"><span className="px-2">Recommend Products</span></h2>
+                    <div className="text-center mb-4">
+                        <h2 className="section-title"><span className="px-2">Recommend Products</span></h2>
                     </div>
-
-                    <div className="row">
-                        <div className="col">
-                            <div className="owl-carousel related-carousel d-flex justify-content-between">
-
-                                {recommendations.map((item) =>
-
-                                    <ProductCard key={item.productId}
-                                                 id={item.productId}
-                                                 name={item.productName}
-                                                 description={item.description}
-                                                 price={item.price}
-                                                 img={item.img}
+                    <div className="row justify-content-center">
+                        <div className="recommendation-container">
+                            {recommendations.map((item) => (
+                                <div className="col-md-2 mb-2" key={item.productId}>
+                                    <ProductCard
+                                        id={item.productId}
+                                        name={item.productName}
+                                        description={item.description}
+                                        price={item.price}
+                                        img={item.img}
                                     />
-                                )}
-
-                                {/*<div className="card product-item border-0">*/}
-                                {/*    <div*/}
-                                {/*        className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">*/}
-                                {/*        <img className="img-fluid w-100" src="img/product-2.jpg" alt=""/>*/}
-                                {/*    </div>*/}
-                                {/*    <div className="card-body border-left border-right text-center p-0 pt-4 pb-3">*/}
-                                {/*        <h6 className="text-truncate mb-3">Colorful Stylish Shirt</h6>*/}
-                                {/*        <div className="d-flex justify-content-center">*/}
-                                {/*            <h6>$123.00</h6>*/}
-                                {/*            <h6 className="text-muted ml-2">*/}
-                                {/*                <del>$123.00</del>*/}
-                                {/*            </h6>*/}
-                                {/*        </div>*/}
-                                {/*    </div>*/}
-                                {/*    <div className="card-footer d-flex justify-content-between ">*/}
-                                {/*        <a href="" className=" btn btn-sm p-2"><i*/}
-                                {/*            className="fas fa-eye text-primary mr-1"></i>View Detail</a>*/}
-                                {/*        <a href="" className="btn btn-sm p-2"><i*/}
-                                {/*            className="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-                            </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-
                 {/*recommendProduct*/}
+
 
 
                 <Footer/>

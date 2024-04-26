@@ -187,7 +187,7 @@ export const Header = () => {
                       </button>
                     </div>
                   </div>
-                  {/* //whishlist */}
+                   {/*//whishlist */}
                   {/*/!* {islogin ?}
               <button
                 className="header-action-btn"

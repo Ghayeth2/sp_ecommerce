@@ -1,0 +1,35 @@
+/* styles.css */
+.product {
+    margin-right: 20px; /* Adjust the margin to add a small space between products */
+}
+.recommendation-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+    scrollbar-width: none; /* Hides scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hides scrollbar for IE and Edge */
+}
+
+.recommendation-container::-webkit-scrollbar {
+    display: none; /* Hides scrollbar for Chrome, Safari, and Opera */
+}
+
+.col-md-2 {
+    flex: 0 0 auto;
+    margin-right: 15px; /* Adjust as needed */
+}
+
+.col-md-2:last-child {
+    margin-right: 0; /* Remove margin for last item */
+}
+
+/* Optional: Add space between product cards */
+.product-card {
+    margin-right: 15px; /* Adjust as needed */
+}
+
+.product-card:last-child {
+    margin-right: 0; /* Remove margin for last card */
+}
+

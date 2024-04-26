@@ -1,3 +1,14 @@
+.product-container {
+    display: flex;
+}
+
+.product {
+    margin-right: 5px;
+}
+
+
+
+
 .owl-carousel {
     display: flex;
     flex-wrap: nowrap;
