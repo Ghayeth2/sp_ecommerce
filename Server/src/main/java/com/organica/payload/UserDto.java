@@ -20,15 +20,15 @@ public class UserDto {
 
     private int Userid;
 
-    private String Name;
-    private String Email;
-    private String Password;
-    private String Contact;
+    private String name;
+    private String email;
+    private String password;
+    private String contact;
 
 
     private Date date;
 
-    private String Role;
+    private String role;
 
 //     private CartDto cart;
 

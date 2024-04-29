@@ -36,9 +36,8 @@ export const Singup = () => {
   }
 
   const handleSinup = async (e) => {
-    window.location.href = "/login";
-    e.preventDefault();
-    if (user.password === user.confirmPassword) {
+    //...
+    try {
       const res = await fetch("http://localhost:9090/auth/singup", {
         method: "POST",
         headers: {
@@ -50,21 +49,16 @@ export const Singup = () => {
       });
       const data = await res.json();
       if (res.status === 200) {
-        onToast("Singup Successfull!!")
+        onToast("Singup Successfull!!");
         setTimeout(() => {
           window.location.href = "/login";
         }, 2000);
       } else {
-       
-          onToast("Something went wrong!!")
-      
-          
+        throw new Error(data.message); // <--- throw an error with the error message
       }
-      console.log(data);
-    }else{
-      onToast("Password not match!!")
+    } catch (error) {
+      onToast(error.message); // <--- display the error message
     }
-        
   };
 
   return (
