@@ -5,10 +5,12 @@ import com.organica.entities.Cart;
 import com.organica.entities.Role;
 import com.organica.entities.TotalRoles;
 import com.organica.entities.User;
+import com.organica.exceptions.UserNameExistsException;
 import com.organica.payload.SingIn;
 import com.organica.payload.UserDto;
 import com.organica.repositories.UserRepo;
 import com.organica.services.UserService;
+import com.organica.utlis.UserNameExistsValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,10 +41,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserNameExistsValidator userNameExistsValidator;
 
 
     @Override
-    public UserDto CreateUser(UserDto userDto) {
+    public UserDto CreateUser(UserDto userDto) throws UserNameExistsException {
+        if (!userNameExistsValidator.validate(userDto.getEmail()))
+            throw new UserNameExistsException("Username exists, try login..");
         User user= this.modelMapper.map(userDto, User.class);
         List<Role> list= new ArrayList<>();
                 list.add(new Role(TotalRoles.ADMIN.name()));

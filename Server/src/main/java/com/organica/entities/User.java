@@ -3,6 +3,7 @@ package com.organica.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -25,6 +26,7 @@ public class User implements UserDetails {
     private int userid;
 
     private String name;
+    @Email
     private String email;
     private String password;
     private String contact;
