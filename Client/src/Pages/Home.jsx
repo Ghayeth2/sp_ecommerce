@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { Header } from '../Component/Header'
-import { Hero } from '../Component/HomeComponent/Hero'
 import { ListProduct } from '../Component/HomeComponent/ListProduct'
 import { Footer } from '../Component/Footer'
 import { ToastContainer} from 'react-toastify';
+import Slider from "../Component/HomeComponent/Slider";
 
 
 
@@ -22,7 +22,8 @@ export const Home = () => {
     - #HEADER
   */}
   <Header />
-  {/* 
+    <Slider/>
+  {/*
     - #ASIDE
   */}
   {/* <aside className="aside">
@@ -172,7 +173,6 @@ export const Home = () => {
       {/* 
   - #HERO
 */}
-     <Hero/>
     
       {/* 
   - #PRODUCT
