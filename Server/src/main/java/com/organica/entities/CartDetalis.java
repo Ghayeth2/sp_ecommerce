@@ -21,12 +21,15 @@ public class CartDetalis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartDetalisId;
-
     @ManyToOne
     @JsonBackReference
     private Product products;
     private int quantity;
     private int amount;
+    @ManyToOne
+    @JsonIgnoreProperties("cartDetalis")
+    private Cart cart;
+
 
     @Override
     public String toString() {
@@ -35,7 +38,5 @@ public class CartDetalis {
                 + "', amount='"+ amount + "'}";
     }
 
-    @ManyToOne
-    @JsonIgnoreProperties("cartDetalis")
-    private Cart cart;
+
 }

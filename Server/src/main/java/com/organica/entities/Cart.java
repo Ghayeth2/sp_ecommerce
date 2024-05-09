@@ -14,18 +14,14 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
     private float totalAmount;
-
-
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "cart")
     private List<CartDetalis> cartDetalis;
 

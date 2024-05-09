@@ -7,7 +7,9 @@ import com.organica.repositories.CartRepo;
 import com.organica.repositories.UserRepo;
 import com.organica.services.CartDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CartDetailsServiceImpl implements CartDetailsService{
 
     @Autowired

@@ -70,7 +70,6 @@ export const ProductDetails = () => {
 
     };
     const handleReview = async () => {
-        console.log(ProductDetails + " " + id);
         const res = await fetch(
             `http://localhost:9090/review`,
             {
@@ -80,7 +79,6 @@ export const ProductDetails = () => {
                     "Authorization": "Bearer " + token
                 },
                 body: JSON.stringify({
-
                     productId: id,
                     rate: ProductDetails,
                 }),
@@ -89,16 +87,13 @@ export const ProductDetails = () => {
         if (res.status === 200) {
             onToast();
         }
-
     };
-
     const fatchData = async () => {
         const response = await fetch(`http://localhost:9090/product/${id}`, {
             headers: {
                 "Authorization": "Bearer " + token
             },
         });
-
         const res = await response.json();
         setData(res)
     }
@@ -108,16 +103,12 @@ export const ProductDetails = () => {
             // Exit early if data or description is not available yet
             return;
         }
-
         const url = `recommendations/generate?desc=${data.description}`;
-        console.log("Description sent to backend: " + data.description);
-
         try {
             const response = await axiosFetch({
                 url: url,
                 method: 'GET',
             });
-
             console.log("Recommendations : " + response.data);
             setRecommendations(response.data);
         } catch (error) {

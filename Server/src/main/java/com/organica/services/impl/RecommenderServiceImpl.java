@@ -16,17 +16,15 @@ public class RecommenderServiceImpl implements RecommenderService {
     @Override
     public List<RecommenderDto> filterRecommenderList(List<RecommenderDto> recommenders) {
         List<RecommenderDto> chosenProducts = new ArrayList<>();
-
         for (RecommenderDto product : recommenders) {
             List<Review> reviews = reviewService.findAllByProductId(product.getProductId());
-            if (reviews.size() >= 10) {
+            if (reviews.size() >= 3) {
                 double averageRating = calculateAverageRating(reviews);
-                if (averageRating >= 2.25) {
+                if (averageRating >= 2.00) {
                     chosenProducts.add(product);
                 }
             }
         }
-
         return chosenProducts;
     }
 
@@ -34,7 +32,6 @@ public class RecommenderServiceImpl implements RecommenderService {
         if (reviews == null || reviews.isEmpty()) {
             return 0.0;
         }
-
         double sum = 0.0;
         for (Review review : reviews) {
             sum += review.getRate();

@@ -20,10 +20,6 @@ import java.util.function.Function;
 
 @Service @Log4j2
 public class JwtService {
-    @Autowired private ProductRepo productRepo;
-    public void doNothing(){
-        log.info("jwt list products: "+productRepo.findAll());
-    }
 
     private final String KEY="822c4707919bf892c76ad2769465cb794993931a98ec939e6e492c5317fb95e7";
 
@@ -31,20 +27,15 @@ public class JwtService {
         return extractClaim(token,Claims::getSubject);
     }
 
-
-
     public  <T> T extractClaim(String token, Function<Claims,T> claimResolver){
         final Claims claims =extractAllClaims(token);
         return claimResolver.apply(claims);
     }
 
-
-
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
 
     }
-
 
     public boolean isTokenValid(String token,UserDetails userDetails){
         final String username= extractUsername(token);
@@ -54,11 +45,9 @@ public class JwtService {
     private boolean isTokenExpired(String token) {
         return extractExpriration(token).before(new Date());
     }
-
     private Date extractExpriration(String token) {
         return extractClaim(token,Claims::getExpiration);
     }
-
 
     public String generateToken(
             Map<String,Object> extraClaims,
@@ -74,8 +63,6 @@ public class JwtService {
                 .compact();
 
     }
-
-
 
     private Claims extractAllClaims(String token){
         return Jwts

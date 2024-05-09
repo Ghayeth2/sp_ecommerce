@@ -13,7 +13,7 @@ public class RecommenderDto {
     private String productName;
     private String description;
     private Float price;
-    private Float weight;
+    private String category;
     private String img;
     private Double similarity;
 }

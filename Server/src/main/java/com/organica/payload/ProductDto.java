@@ -14,7 +14,7 @@ public class ProductDto {
     private String ProductName;
     private String Description;
     private Float Price;
-    private Float Weight;
+    private String category;
     private String Img;
 
     public int getProductId() {

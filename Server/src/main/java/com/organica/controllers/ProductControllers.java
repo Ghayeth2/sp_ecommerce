@@ -33,20 +33,32 @@ public class ProductControllers {
     private ProductRepo productRepo;
     //Create Product
     @PostMapping(value = "/add" )
-    public ResponseEntity<ProductDto> CreateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestParam("img") MultipartFile file) throws IOException {
+    public ResponseEntity<ProductDto> CreateProduct(@RequestParam
+                            MultiValueMap<String, String> formData,
+                            @RequestPart("image") MultipartFile file)
+            throws IOException {
         ProductDto productDto = new ProductDto();
-        productDto.setProductName(formData.getFirst("productname"));
+        productDto.setProductName(formData.getFirst("name"));
         productDto.setDescription(formData.getFirst("description"));
-        productDto.setWeight(Float.valueOf(formData.getFirst("weight")));
+        productDto.setCategory((formData.getFirst("category")));
         productDto.setPrice(Float.valueOf(formData.getFirst("price")));
-//        productDto.setImg(file.getBytes());
 
         ProductDto save = this.productService.CreateProduct(productDto, file);
 
         return new ResponseEntity<ProductDto>(save,HttpStatusCode.valueOf(200));
     }
 
-    //Get by Id
+    @GetMapping("")
+    public ResponseEntity<List<Product>> getAll(Pageable pageable){
+        Page<Product> products = this.productService.ReadAllProduct(pageable);
+        List<Product> productsList = products.getContent();
+        List<Product> collect = productsList.stream().map(dto -> new Product(dto.getProductId(), dto.getProductName(),
+                dto.getDescription(), dto.getPrice(), dto.getCategory(),
+                dto.getImg())).collect(Collectors.toList());
+
+        return new ResponseEntity<>(collect, HttpStatus.OK);
+    }
+
     @GetMapping("/{productid}")
     public ResponseEntity<ProductDto> GetById(@PathVariable Integer productid){
         ProductDto product = this.productService.ReadProduct(productid);
@@ -54,20 +66,6 @@ public class ProductControllers {
         return new ResponseEntity<>(product,HttpStatusCode.valueOf(200));
     }
 
-
-    //Get All Product
-    @GetMapping("")
-    public ResponseEntity<List<Product>> getAll(Pageable pageable){
-        Page<Product> products = this.productService.ReadAllProduct(pageable);
-        List<Product> productsList = products.getContent();
-
-        // Convert image data before sending the response
-        List<Product> collect = productsList.stream().map(dto -> new Product(dto.getProductId(), dto.getProductName(),
-                dto.getDescription(), dto.getPrice(), dto.getWeight(),
-                dto.getImg())).collect(Collectors.toList());
-
-        return new ResponseEntity<>(collect, HttpStatus.OK);
-    }
     @GetMapping("/getAll")
     public ResponseEntity<List<Product>> products(){
         return new ResponseEntity<>(productRepo.findAll(), HttpStatusCode.valueOf(200));
@@ -84,19 +82,18 @@ public class ProductControllers {
 
 
     //Update Product
-//    @PutMapping("/{ProductId}")
-//    public ResponseEntity<ProductDto> UpdateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestParam("img") MultipartFile file,@PathVariable Integer ProductId) throws IOException {
-//        ProductDto productDto = new ProductDto();
-//        productDto.setProductName(formData.getFirst("productname"));
-//        productDto.setDescription(formData.getFirst("description"));
-//        productDto.setWeight(Float.valueOf(formData.getFirst("weight")));
-//        productDto.setPrice(Float.valueOf(formData.getFirst("price")));
-//        productDto.setImg(file.getBytes());
-//
-//        ProductDto save = this.productService.UpdateProduct(productDto,ProductId);
-//
-//        return new ResponseEntity<ProductDto>(save,HttpStatusCode.valueOf(200));
-//    }
+    @PutMapping("/{ProductId}")
+    public ResponseEntity<ProductDto> UpdateProduct(@RequestParam MultiValueMap<String, String> formData, @RequestPart("image") MultipartFile file,@PathVariable Integer ProductId) throws IOException {
+        ProductDto productDto = new ProductDto();
+        productDto.setProductName(formData.getFirst("name"));
+        productDto.setDescription(formData.getFirst("description"));
+        productDto.setCategory((formData.getFirst("category")));
+        productDto.setPrice(Float.valueOf(formData.getFirst("price")));
+
+        ProductDto save = this.productService.UpdateProduct(productDto,ProductId, file);
+
+        return new ResponseEntity<ProductDto>(save,HttpStatusCode.valueOf(200));
+    }
 
 
 

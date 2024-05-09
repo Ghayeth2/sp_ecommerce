@@ -51,18 +51,12 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartDto addProductToCart(CartHelp cartHelp) {
-
         int productId=cartHelp.getProductId();
         int quantity= cartHelp.getQuantity();
-        String userEmail= cartHelp.getUserEmail();
-        int total=0;
         AtomicReference<Integer> totalAmount =new AtomicReference<>(0);
 
-        User user= this.userRepo.findByEmail(userEmail);
-
+        User user= this.userRepo.findByEmail(cartHelp.getUserEmail());
         Product product=this.productRepo.findById(productId).orElseThrow();
-
-        //create cart detail
 
         CartDetalis cartDetalis = new CartDetalis();
         cartDetalis.setProducts(product);
@@ -70,14 +64,10 @@ public class CartServiceImpl implements CartService {
         cartDetalis.setAmount((int) (product.getPrice()*quantity));
 
         Cart cart=user.getCart();
-
         if(cart==null){
             Cart cart1=new Cart();
             cart.setUser(user);
-
             int totalAmount2=0;
-
-
 
             CartDetalis cartDetalis1= new CartDetalis();
             cartDetalis1.setQuantity(quantity);
@@ -85,39 +75,21 @@ public class CartServiceImpl implements CartService {
             cartDetalis1.setAmount((int) (product.getPrice()*quantity));
             totalAmount2= cartDetalis1.getAmount();
 
-
             List<CartDetalis> pro=cart.getCartDetalis();
             pro.add(cartDetalis1);
             cart1.setCartDetalis(pro);
             cart1.setTotalAmount(totalAmount2);
             cartDetalis1.setCart(cart1);
 
-//            for (CartDetalis i:pro ) {
-//                Product p=i.getProducts();
-//                p.setImg(decompressBytes(p.getImg()));
-//            }
             CartDto map = this.modelMapper.map(cart1, CartDto.class);
             List<CartDetailDto> cartDetalis2 = map.getCartDetalis();
-
-
-            for (CartDetailDto i:cartDetalis2 ) {
-                ProductDto p=i.getProducts();
-//                p.setImg(decompressBytes(p.getImg()));
-            }
             map.setCartDetalis(cartDetalis2);
             return map;
-
-
-
         }
 
         cartDetalis.setCart(cart);
-
-
         List<CartDetalis> list=cart.getCartDetalis();
-
         AtomicReference<Boolean> flag=new AtomicReference<>(false);
-
         List<CartDetalis> newProduct = list.stream().map((i) -> {
             if (i.getProducts().getProductId() == productId) {
                 i.setQuantity(quantity);
@@ -125,34 +97,25 @@ public class CartServiceImpl implements CartService {
                 flag.set(true);
             }
             totalAmount.set(totalP(i.getAmount(),totalAmount.get()));
-            
             return i;
         }).collect(Collectors.toList());
 
         if (flag.get()){
             list.clear();
             list.addAll(newProduct);
-
         }else {
-
             cartDetalis.setCart(cart);
             totalAmount.set(totalAmount.get()+(int) (quantity*product.getPrice()));
             list.add(cartDetalis);
-
         }
         cart.setCartDetalis(list);
         cart.setTotalAmount(totalAmount.get());
-        System.out.println(cart.getTotalAmount());
+
         Cart save = this.cartRepo.save(cart);
 
         CartDto map = this.modelMapper.map(save, CartDto.class);
         List<CartDetailDto> cartDetalis1 = map.getCartDetalis();
 
-
-        for (CartDetailDto i:cartDetalis1 ) {
-            ProductDto p=i.getProducts();
-//            p.setImg(decompressBytes(p.getImg()));
-        }
         map.setCartDetalis(cartDetalis1);
         return map;
     }
@@ -162,17 +125,9 @@ public class CartServiceImpl implements CartService {
         User user = this.userRepo.findByEmail(userEmail);
         Cart byUser = this.cartRepo.findByUser(user);
 
-
-
-    // img decompressBytes
         CartDto map = this.modelMapper.map(byUser, CartDto.class);
         List<CartDetailDto> cartDetalis1 = map.getCartDetalis();
 
-
-        for (CartDetailDto i:cartDetalis1 ) {
-            ProductDto p=i.getProducts();
-//            p.setImg(decompressBytes(p.getImg()));
-        }
         map.setCartDetalis(cartDetalis1);
         return map;
     }

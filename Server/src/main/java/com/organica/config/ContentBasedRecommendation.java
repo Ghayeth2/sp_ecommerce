@@ -25,14 +25,10 @@ public class ContentBasedRecommendation {
 
 
     private static final int VECTOR_SIZE = 1000;
-
     public Vector convertToVector(String input) {
         Map<String, Integer> dictionary = new HashMap<>();
-
         Set<String> terms = extractTerms(input);
-
         Vector vector = new DenseVector(VECTOR_SIZE);
-
         for (String term : terms) {
             int termID = dictionary.computeIfAbsent(term, k -> dictionary.size());
             if (termID < VECTOR_SIZE) {
@@ -65,17 +61,14 @@ public class ContentBasedRecommendation {
                     .price(product.getPrice())
                     .description(product.getDescription())
                     .img(product.getImg())
-                    .weight(product.getWeight())
+                    .category(product.getCategory())
                     .similarity(similarity)
                     .build();
             similarProducts.add(productDto);
         }
-
         similarProducts.sort((p1, p2) -> Double.compare(p2.getSimilarity(), p1.getSimilarity()));
-
         return similarProducts.subList(0, Math.min(10, similarProducts.size()));
     }
-
     private double calculateCosineSimilarity(Vector vector1, Vector vector2) {
         return vector1.dot(vector2) / (vector1.norm(2) * vector2.norm(2));
     }

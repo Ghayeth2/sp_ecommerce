@@ -27,7 +27,7 @@ public class CartController {
     private CartService cartService;
 
 
-    @PostMapping("/addproduct")
+    @PostMapping("/")
     public ResponseEntity<CartDto> addProduct(@RequestBody CartHelp cartHelp,Principal principal){
         String userEmail = principal.getName();
         cartHelp.setUserEmail(userEmail);

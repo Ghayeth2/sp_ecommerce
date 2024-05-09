@@ -29,7 +29,6 @@ public class ReviewController {
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody ReviewDto reviewDto){
-//        String userEmail = principal.getName();
         Product product = new Product();
         product.setProductId(reviewDto.getProductId());
 
@@ -39,5 +38,10 @@ public class ReviewController {
                         .product(product)
                         .build()
         ));
+
+
+
+
+
     }
 }

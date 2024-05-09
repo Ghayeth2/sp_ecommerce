@@ -18,20 +18,24 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
     @Column
     private String productName;
-
 //    @Column(columnDefinition = "TEXT")
     private String description;
     private Float price;
-    private Float weight;
-//    @Column(length = 65555)
-//    private byte[] img;
+//    private Float weight;
+    private String category;
     private String img;
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
+    private List<CartDetalis> list;
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Review> reviews;
 
     @Override
     public String toString() {
@@ -49,27 +53,18 @@ public class Product {
         return "{" + " productId='" + getProductId() + "'"
                 + ", productName='" + getProductName() + "'"
                 + ", price='" + getPrice() + "'"
-                + ", weight='" + getWeight() + "'"
+                + ", weight='" + getCategory() + "'"
                 + ", description='" + getDescription() + "'"
                 + ", img='" + getImg() + "'"
                 + ", list=" + shortCustomersToString + "}";
     }
 
-    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private List<CartDetalis> list;
-
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Review> reviews;
-
-    public Product(int productId, String productName, String description, Float price, Float weight, String img) {
+    public Product(int productId, String productName, String description, Float price, String category, String img) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
         this.price = price;
-        this.weight = weight;
+        this.category = category;
         this.img = img;
     }
 }

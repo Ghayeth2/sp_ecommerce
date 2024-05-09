@@ -32,7 +32,7 @@ public interface ProductService {
 
 
     //update
-    ProductDto UpdateProduct(ProductDto productDto,Integer ProductId);
+    ProductDto UpdateProduct(ProductDto productDto,Integer ProductId, MultipartFile file) throws IOException;
 
 
 
