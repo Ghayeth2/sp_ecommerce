@@ -10,7 +10,7 @@ export const ListProduct = () => {
     const [totalPages, setTotalPages] = useState(1); // Track the total number of pages
 
     const fetchData = async (page) => {
-        const size = 30; // Specify the page size
+        const size = 300; // Specify the page size
         const url = `product?page=${page}&size=${size}`;
 
         const response = await axiosFetch({

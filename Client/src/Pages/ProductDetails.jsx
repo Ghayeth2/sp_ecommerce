@@ -70,6 +70,7 @@ export const ProductDetails = () => {
 
     };
     const handleReview = async () => {
+        console.log(ProductDetails + " " + id);
         const res = await fetch(
             `http://localhost:9090/review`,
             {
@@ -79,6 +80,7 @@ export const ProductDetails = () => {
                     "Authorization": "Bearer " + token
                 },
                 body: JSON.stringify({
+
                     productId: id,
                     rate: ProductDetails,
                 }),
@@ -87,13 +89,16 @@ export const ProductDetails = () => {
         if (res.status === 200) {
             onToast();
         }
+
     };
+
     const fatchData = async () => {
         const response = await fetch(`http://localhost:9090/product/${id}`, {
             headers: {
                 "Authorization": "Bearer " + token
             },
         });
+
         const res = await response.json();
         setData(res)
     }
@@ -103,12 +108,16 @@ export const ProductDetails = () => {
             // Exit early if data or description is not available yet
             return;
         }
+
         const url = `recommendations/generate?desc=${data.description}`;
+        console.log("Description sent to backend: " + data.description);
+
         try {
             const response = await axiosFetch({
                 url: url,
                 method: 'GET',
             });
+
             console.log("Recommendations : " + response.data);
             setRecommendations(response.data);
         } catch (error) {
@@ -133,7 +142,7 @@ export const ProductDetails = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 d-flex justify-content-center align-items-center">
-                                {!data.img ? <></> : <img className='productimg' width="700" height="700" src={data.img}
+                                {!data.img ? <></> : <img className='img_box-inner' width="350" height="350" src={data.img}
                                                           alt="Product Image"/>}
                             </div>
                             <div className="col-md-6">

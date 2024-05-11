@@ -20,6 +20,7 @@ public interface ProductService {
     //read
     ProductDto ReadProduct(Integer ProductId);
 
+    List<ProductDto> findAllByCategory(String category);
 
     //readAll
     Page<Product> ReadAllProduct(Pageable pageable);

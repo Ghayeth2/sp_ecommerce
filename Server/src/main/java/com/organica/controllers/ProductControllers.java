@@ -48,6 +48,12 @@ public class ProductControllers {
         return new ResponseEntity<ProductDto>(save,HttpStatusCode.valueOf(200));
     }
 
+    @GetMapping("category")
+    public ResponseEntity<List<ProductDto>> productsByCategory(@RequestParam
+                                                                   String category) {
+        return new ResponseEntity<>(productService.findAllByCategory(category), HttpStatus.OK);
+    }
+
     @GetMapping("")
     public ResponseEntity<List<Product>> getAll(Pageable pageable){
         Page<Product> products = this.productService.ReadAllProduct(pageable);

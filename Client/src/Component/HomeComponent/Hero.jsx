@@ -16,7 +16,7 @@ export function Hero() {
 
       <div className="main">
         <div className="container">
-          <div id="header-carousel" className="carousel slide" data-ride="carousel">
+          {/*<div id="header-carousel" className="carousel slide" data-ride="carousel">*/}
             <div className="carousel-inner">
               <div className="carousel-item active" style={{ height: '410px' }}>
                 <img className="img-fluid" src="img/carousel-1.jpg" alt="Image" />
@@ -24,7 +24,7 @@ export function Hero() {
               </div>
 
             </div>
-          </div>
+          {/*</div>*/}
         </div>
       </div>
   );

@@ -72,4 +72,116 @@ public class ContentBasedRecommendation {
     private double calculateCosineSimilarity(Vector vector1, Vector vector2) {
         return vector1.dot(vector2) / (vector1.norm(2) * vector2.norm(2));
     }
+
+//    private static final double SIMILARITY_THRESHOLD = 0.6; // Adjust as needed
+//
+//    public List<RecommenderDto> findSimilarProducts(String queryDescription) {
+//        List<Product> allProducts = productRepo.findAll();
+//        List<RecommenderDto> similarProducts = new ArrayList<>();
+//
+//        // Split query description into individual words
+//        Set<String> queryWords = extractWords(queryDescription);
+//
+//        for (Product product : allProducts) {
+//            if (!queryDescription.equalsIgnoreCase(product.getDescription())) { // Exclude the product itself
+//                Set<String> productWords = extractWords(product.getDescription());
+//                double similarity = calculateWordSimilarity(queryWords, productWords);
+//
+//                if (similarity >= SIMILARITY_THRESHOLD) {
+//                    RecommenderDto productDto = RecommenderDto.builder()
+//                            .productId(product.getProductId())
+//                            .productName(product.getProductName())
+//                            .price(product.getPrice())
+//                            .description(product.getDescription())
+//                            .img(product.getImg())
+//                            .category(product.getCategory())
+//                            .similarity(similarity)
+//                            .build();
+//                    similarProducts.add(productDto);
+//                }
+//            }
+//        }
+//
+//        similarProducts.sort((p1, p2) -> Double.compare(p2.getSimilarity(), p1.getSimilarity()));
+//
+//        return similarProducts.subList(0, Math.min(10, similarProducts.size()));
+//    }
+//
+//    private Set<String> extractWords(String input) {
+//        Set<String> words = new HashSet<>();
+//        String[] tokens = input.split("\\s+");
+//        for (String token : tokens) {
+//            words.add(token.toLowerCase());
+//        }
+//        return words;
+//    }
+//
+//    private double calculateWordSimilarity(Set<String> queryWords, Set<String> productWords) {
+//        int commonWords = 0;
+//        for (String word : queryWords) {
+//            if (productWords.contains(word)) {
+//                commonWords++;
+//            }
+//        }
+//        double similarity = (double) commonWords / Math.max(queryWords.size(), productWords.size());
+//        return similarity;
+//    }
+
+
+    ///////////////////// 2nd way //////////////////////
+
+//    private static final double SIMILARITY_THRESHOLD = 0.5; // Adjust as needed
+//
+//    public List<RecommenderDto> findSimilarProducts(String queryDescription) {
+//        List<Product> allProducts = productRepo.findAll();
+//        List<RecommenderDto> similarProducts = new ArrayList<>();
+//
+//        // Split query description into individual words
+//        Set<String> queryWords = extractWords(queryDescription);
+//
+//        for (Product product : allProducts) {
+//            Set<String> productWords = extractWords(product.getDescription());
+//            double similarity = calculateWordSimilarity(queryWords, productWords);
+//
+//            if (similarity >= SIMILARITY_THRESHOLD) {
+//                RecommenderDto productDto = RecommenderDto.builder()
+//                        .productId(product.getProductId())
+//                        .productName(product.getProductName())
+//                        .price(product.getPrice())
+//                        .description(product.getDescription())
+//                        .img(product.getImg())
+//                        .category(product.getCategory())
+//                        .similarity(similarity)
+//                        .build();
+//                similarProducts.add(productDto);
+//            }
+//        }
+//
+//        similarProducts.sort((p1, p2) -> Double.compare(p2.getSimilarity(), p1.getSimilarity()));
+//
+//        return similarProducts.subList(0, Math.min(10, similarProducts.size()));
+//    }
+//
+    private Set<String> extractWords(String input) {
+        Set<String> words = new HashSet<>();
+        String[] tokens = input.split("\\s+");
+        for (String token : tokens) {
+            words.add(token.toLowerCase());
+        }
+        return words;
+    }
+//
+//    private double calculateWordSimilarity(Set<String> queryWords, Set<String> productWords) {
+//        int commonWords = 0;
+//        for (String word : queryWords) {
+//            if (productWords.contains(word)) {
+//                commonWords++;
+//            }
+//        }
+//        double similarity = (double) commonWords / Math.max(queryWords.size(), productWords.size());
+//        return similarity;
+//    }
+
 }
+
+
