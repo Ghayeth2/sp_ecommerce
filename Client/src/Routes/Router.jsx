@@ -8,6 +8,8 @@ import { CheckOut } from "../Pages/CheckOut";
 import { Login } from "../Pages/Login";
 import { Singup } from "../Pages/Singup";
 import { Protected } from "../Component/Protected";
+import {NewProduct} from "../Component/NewProduct";
+import NewPruductPage from "../Pages/NewPruductPage";
 
 export const Router = () => {
   const [isSignedIn, setIsSignedIn] = useState(
@@ -18,8 +20,9 @@ export const Router = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+          <Route path="/New" element={<NewPruductPage/>} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/product/:id" element={<ProductDetails/>} />
         <Route
           path="/cart"
           element={

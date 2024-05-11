@@ -61,7 +61,7 @@ export const Header = () => {
                 </li>
                 <li className="dropdown dropdown-megamenu">
                   <a className="navbar-link" data-target="#" href="javascript:">
-                   <h>Men</h>
+                    <h>Men</h>
                   </a>
                   <ul className="dropdown-menu">
                     <li>
@@ -147,48 +147,52 @@ export const Header = () => {
                     <li><a href="shop-search-result.html">Perfume</a></li>
                   </ul>
                 </li>
+                <li className="dropdown-megamenu">
+                  <a className="navbar-link" data-target="#" href="/New">
+                    Add New Product
+                  </a>
+                </li>
 
 
-
-                {/* <!-- BEGIN TOP SEARCH --> */}
-                {/*<li className="menu-search">*/}
-                {/*  <span className="sep"></span>*/}
-                {/*  <i className="fa fa-search search-btn"></i>*/}
-                {/*  <div className="search-box">*/}
-                {/*    <form action="#">*/}
-                {/*      <div className="input-group">*/}
-                {/*        <input type="text" placeholder="Search" className="form-control"/>*/}
-                {/*        <span className="input-group-btn">*/}
-                {/*      <button className="btn btn-primary" type="submit">Search</button>*/}
-                {/*    </span>*/}
-                {/*      </div>*/}
-                {/*    </form>*/}
-                {/*  </div>*/}
-                {/*</li>*/}
-                <div className="header-action">
-                  <div className="search-wrapper" data-search-wrapper="">
-                    <button
-                        className=""
-                        aria-label="Toggle search"
-                        data-search-btn=""
-                    >
-                      {/*<ion-icon name="search-outline" className="search-icon"/>*/}
-                      {/*<ion-icon name="close-outline" className="close-icon" />*/}
-                    </button>
-                    <div classname="basket-outline">
-                      <input
-                          type="search"
-                          name="search"
-                          placeholder="Search here"
-                          className="search-input"
-                      />
-                      <button className="search-submit" aria-label="Submit search">
-                        <ion-icon name="search-outline"/>
+                  {/* <!-- BEGIN TOP SEARCH --> */}
+                  {/*<li className="menu-search">*/}
+                  {/*  <span className="sep"></span>*/}
+                  {/*  <i className="fa fa-search search-btn"></i>*/}
+                  {/*  <div className="search-box">*/}
+                  {/*    <form action="#">*/}
+                  {/*      <div className="input-group">*/}
+                  {/*        <input type="text" placeholder="Search" className="form-control"/>*/}
+                  {/*        <span className="input-group-btn">*/}
+                  {/*      <button className="btn btn-primary" type="submit">Search</button>*/}
+                  {/*    </span>*/}
+                  {/*      </div>*/}
+                  {/*    </form>*/}
+                  {/*  </div>*/}
+                  {/*</li>*/}
+                  <div className="header-action">
+                    <div className="search-wrapper" data-search-wrapper="">
+                      <button
+                          className=""
+                          aria-label="Toggle search"
+                          data-search-btn=""
+                      >
+                        {/*<ion-icon name="search-outline" className="search-icon"/>*/}
+                        {/*<ion-icon name="close-outline" className="close-icon" />*/}
                       </button>
+                      <div classname="basket-outline">
+                        <input
+                            type="search"
+                            name="search"
+                            placeholder="Search here"
+                            className="search-input"
+                        />
+                        <button className="search-submit" aria-label="Submit search">
+                          <ion-icon name="search-outline"/>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                   {/*//whishlist */}
-                  {/*/!* {islogin ?}
+                    {/*//whishlist */}
+                    {/*/!* {islogin ?}
               <button
                 className="header-action-btn"
                 aria-label="Open whishlist"
@@ -202,41 +206,41 @@ export const Header = () => {
             ) : (
               <></>
             )} */}
-                  {!islogin ? (
-                      <button
-                          className=""
-                          aria-label="Open shopping cart"
-                          data-panel-btn="cart"
-                          onClick={handalRedirect}
-                      >
-                        <ion-icon name="person"></ion-icon>
-                      </button>
-                  ) : (
-                      <>
+                    {!islogin ? (
                         <button
-                            className="header-action-btn"
+                            className=""
                             aria-label="Open shopping cart"
                             data-panel-btn="cart"
                             onClick={handalRedirect}
                         >
-                          <ion-icon name="basket-outline"/>
-                          <data className="btn-badge" value={2}>
-                            0
-                          </data>
+                          <ion-icon name="person"></ion-icon>
                         </button>
-                      </>
+                    ) : (
+                        <>
+                          <button
+                              className="header-action-btn"
+                              aria-label="Open shopping cart"
+                              data-panel-btn="cart"
+                              onClick={handalRedirect}
+                          >
+                            <ion-icon name="basket-outline"/>
+                            <data className="btn-badge" value={2}>
+                              0
+                            </data>
+                          </button>
+                        </>
 
-                  )}
-                  {islogin ? <button
-                      className="header-action-btn"
-                      aria-label="Open shopping cart"
-                      data-panel-btn="cart"
-                      onClick={() => handalLogout()}
-                  >
-                    <ion-icon name="log-out-outline"></ion-icon>
-                  </button> : <></>}
-                </div>
-                {/* <!-- END TOP SEARCH --> */}
+                    )}
+                    {islogin ? <button
+                        className="header-action-btn"
+                        aria-label="Open shopping cart"
+                        data-panel-btn="cart"
+                        onClick={() => handalLogout()}
+                    >
+                      <ion-icon name="log-out-outline"></ion-icon>
+                    </button> : <></>}
+                  </div>
+                  {/* <!-- END TOP SEARCH --> */}
               </ul>
             </div>
             {/* <!-- END NAVIGATION --> */}
@@ -244,5 +248,5 @@ export const Header = () => {
         </div>
 
       </div>
-  );
+);
 };
