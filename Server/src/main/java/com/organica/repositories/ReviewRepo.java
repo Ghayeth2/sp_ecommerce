@@ -10,4 +10,5 @@ import java.util.List;
 public interface ReviewRepo extends JpaRepository<Review, Integer> {
     @Query(value = "SELECT * FROM review r WHERE r.product_product_id = :productId", nativeQuery = true)
     List<Review> findAllReviewsByProductId(@Param("productId") int productId);
+
 }
