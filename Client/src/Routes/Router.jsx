@@ -27,11 +27,8 @@ export const Router = () => {
           <Route path="/New" element={<NewPruductPage/>} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ProductDetails/>} />
-        <Route
-          path="/cart"
-          element={
-            <Protected isSignedIn={isSignedIn}>
-              <Cart />
+        <Route path="/cart" element={
+            <Protected isSignedIn={isSignedIn}><Cart />
             </Protected>
           }
         />
