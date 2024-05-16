@@ -136,7 +136,7 @@ export const ProductDetails = () => {
 
     return (
         <>
-            <Header/>
+
             <>
                 <div className="pd-wrap">
                     <div className="container">

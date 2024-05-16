@@ -1,0 +1,113 @@
+/* Header container */
+.header {
+    background-color: #ffffff; /* Change as needed */
+    padding: 15px 0; /* Adjust spacing as needed */
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px; /* Adjust max-width as needed */
+    margin: 0 auto;
+    padding: 0 15px; /* Adjust padding as needed */
+}
+
+/* Header left section */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.site-logo img {
+    max-width: 150px; /* Adjust logo size as needed */
+}
+
+.mobi-toggler {
+    display: none; /* Hide mobile toggler initially */
+}
+
+/* Header navigation */
+.header-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.header-navigation ul li {
+    position: relative; /* Ensure relative positioning for dropdowns */
+    margin-right: 20px; /* Adjust spacing between menu items */
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #333; /* Adjust link color as needed */
+}
+
+.dropdown-menu {
+    display: none; /* Hide dropdown menus by default */
+    position: absolute;
+    top: 100%; /* Position dropdowns below their parent */
+    left: 0;
+    z-index: 1; /* Ensure dropdowns appear above other content */
+    background-color: #fff; /* Dropdown background color */
+    border: 1px solid #ccc; /* Dropdown border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Dropdown shadow */
+}
+
+.dropdown-menu.active {
+    display: block; /* Show dropdown if active */
+}
+
+.dropdown-menu li {
+    padding: 10px;
+}
+
+/* Header action */
+.header-action {
+    display: flex;
+    align-items: center;
+}
+
+.search-wrapper {
+    position: relative;
+    margin-right: 20px; /* Adjust spacing between search and other buttons */
+}
+
+.search-input {
+    padding: 8px 30px 8px 10px; /* Adjust input padding as needed */
+    border: 1px solid #ccc; /* Adjust input border color as needed */
+    border-radius: 20px; /* Adjust input border radius as needed */
+    width: 200px; /* Adjust input width as needed */
+}
+
+.search-submit {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Header action buttons */
+.header-action-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px; /* Adjust spacing between action buttons */
+}
+
+/* Button badge */
+.btn-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red; /* Adjust badge background color as needed */
+    color: white; /* Adjust badge text color as needed */
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 12px; /* Adjust badge font size as needed */
+}

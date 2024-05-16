@@ -45,7 +45,7 @@ export const ListProduct = () => {
 
 
 
-                        <p className="section-subtitle"></p>
+                        <p className="section-subtitle"> New Products </p>
                         <ul className="grid-list">
                             {data.map((item) => (
                                 <ProductCard

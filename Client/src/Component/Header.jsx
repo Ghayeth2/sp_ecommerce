@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+// import './Header.css'
 
 import * as Scroll from 'react-scroll';
 
@@ -141,7 +141,7 @@ export const Header = () => {
 
                   <ul className="dropdown-menu">
                     <li><a href="/cosmatics">Makeup</a></li>
-                    <li><a href="/cosmatics">Self care</a></li>
+                    <li className="active"><a href="/cosmatics">Self care</a></li>
                     <li><a href="/cosmatics">Hair care</a></li>
                     <li><a href="/cosmatics">Skin care</a></li>
                     <li><a href="/cosmatics">Perfume</a></li>

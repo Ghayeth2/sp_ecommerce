@@ -10,6 +10,7 @@ import { Singup } from "../Pages/Singup";
 import { Protected } from "../Component/Protected";
 import {NewProduct} from "../Component/NewProduct";
 import NewPruductPage from "../Pages/NewPruductPage";
+import {Header} from "../Component/Header";
 
 export const Router = () => {
   const [isSignedIn, setIsSignedIn] = useState(
@@ -26,18 +27,23 @@ export const Router = () => {
         <Route path="/cosmatics" element={<Home />} />
           <Route path="/New" element={<NewPruductPage/>} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:id" element={<ProductDetails/>} />
+
+
+        <Route path="/product/:id" element={
+          <React.Fragment>
+            <Header/>
+            <ProductDetails />
+          </React.Fragment>
+        } />
+
+
         <Route path="/cart" element={
-            <Protected isSignedIn={isSignedIn}><Cart />
-            </Protected>
+          <Protected isSignedIn={isSignedIn}><Cart /></Protected>
           }
         />
         <Route path="/login" element={<Login />} />
         <Route path="/singup" element={<Singup />} />
-        <Route path="/checkout" element={
-        <Protected isSignedIn={isSignedIn}>
-        <CheckOut />
-      </Protected>
+        <Route path="/checkout" element={<Protected isSignedIn={isSignedIn}><CheckOut /></Protected>
         } />
       </Routes>
     </>

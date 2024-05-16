@@ -22,6 +22,16 @@
     display: none;
 
 }
+.btn-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red; /* Adjust badge background color as needed */
+    color: white; /* Adjust badge text color as needed */
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 12px; /* Adjust badge font size as needed */
+}
 
 
 
