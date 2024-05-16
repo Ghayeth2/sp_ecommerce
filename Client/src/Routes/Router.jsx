@@ -20,6 +20,10 @@ export const Router = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+          <Route path="/men" element={<Home />} />
+          <Route path="/wemen" element={<Home />} />
+        <Route path="/Electronics" element={<Home />} />
+        <Route path="/cosmatics" element={<Home />} />
           <Route path="/New" element={<NewPruductPage/>} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ProductDetails/>} />

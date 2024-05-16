@@ -43,39 +43,9 @@ export const ListProduct = () => {
             <section id="products" className="section product">
                 <div className="container">
 
-                        <h2 className="h2">Categories</h2>
-                        <ul className="filter-list">
-                            <li>
-                                <button className="filter-btn active">
 
 
-                                    <p className="filter-text">Men</p>
-                                </button>
-                            </li>
-                            <li>
-                                <button className="filter-btn">
-
-
-                                    <p className="filter-text">Women</p>
-                                </button>
-                            </li>
-                            <li>
-                                <button className="filter-btn">
-
-
-                                    <p className="filter-text">Electronics</p>
-                                </button>
-                            </li>
-                            <li>
-                                <button className="filter-btn">
-
-                                    <p className="filter-text">Cosmatics</p>
-                                </button>
-                            </li>
-
-                            {/* Filter buttons go here */}
-                        </ul>
-                        <p className="section-subtitle"> New products </p>
+                        <p className="section-subtitle"></p>
                         <ul className="grid-list">
                             {data.map((item) => (
                                 <ProductCard

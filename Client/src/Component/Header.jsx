@@ -60,7 +60,7 @@ export const Header = () => {
                     Home</a>
                 </li>
                 <li className="dropdown dropdown-megamenu">
-                  <a className="navbar-link" data-target="#" href="javascript:">
+                  <a className="navbar-link" data-target="#" href="/men">
                     <h>Men</h>
                   </a>
                   <ul className="dropdown-menu">
@@ -70,12 +70,12 @@ export const Header = () => {
                           <div className="col-md-4 header-navigation-col">
                             <h4></h4>
                             <ul>
-                              <li><a href="shop-product-list.html">Pants</a></li>
-                              <li><a href="shop-product-list.html">Sport</a></li>
-                              <li><a href="shop-product-list.html">Shoes</a></li>
-                              <li><a href="shop-product-list.html">T-shirts</a></li>
-                              <li><a href="shop-product-list.html">Jacket</a></li>
-                              <li><a href="shop-product-list.html">Watches</a></li>
+                              <li><a href="/men">Pants</a></li>
+                              <li><a href="/men">Sport</a></li>
+                              <li><a href="/men">Shoes</a></li>
+                              <li><a href="/men">T-shirts</a></li>
+                              <li><a href="/men">Jacket</a></li>
+                              <li><a href="/men">Watches</a></li>
                             </ul>
                           </div>
                         </div>
@@ -84,7 +84,7 @@ export const Header = () => {
                   </ul>
                 </li>
                 <li className="dropdown dropdown-megamenu">
-                  <a className="navbar-link" data-target="#" href="javascript:">
+                  <a className="navbar-link" data-target="#" href="/wemen">
                     Women
                   </a>
                   <ul className="dropdown-menu">
@@ -94,12 +94,12 @@ export const Header = () => {
                           <div className="col-md-4 header-navigation-col">
                             <h4></h4>
                             <ul>
-                              <li><a href="shop-product-list.html">Pants</a></li>
-                              <li><a href="shop-product-list.html">Sport</a></li>
-                              <li><a href="shop-product-list.html">Shoes</a></li>
-                              <li><a href="shop-product-list.html">T-shirts</a></li>
-                              <li><a href="shop-product-list.html">Jacket</a></li>
-                              <li><a href="shop-product-list.html">Watches</a></li>
+                              <li><a href="/wemen">Pants</a></li>
+                              <li><a href="/wemen">Sport</a></li>
+                              <li><a href="/wemen">Shoes</a></li>
+                              <li><a href="/wemen">T-shirts</a></li>
+                              <li><a href="/wemen">Jacket</a></li>
+                              <li><a href="/wemen">Watches</a></li>
                             </ul>
                           </div>
                         </div>
@@ -108,7 +108,7 @@ export const Header = () => {
                   </ul>
                 </li>
                 <li className="dropdown dropdown-megamenu">
-                  <a className="navbar-link" data-target="#" href="javascript:">
+                  <a className="navbar-link" data-target="#" href="/Electronics">
                     Electronics
                   </a>
                   <ul className="dropdown-menu">
@@ -118,14 +118,14 @@ export const Header = () => {
                           <div className="col-md-4 header-navigation-col">
                             <h4></h4>
                             <ul>
-                              <li><a href="shop-product-list.html">PC</a></li>
-                              <li><a href="shop-product-list.html">Laptop</a></li>
-                              <li><a href="shop-product-list.html">Mobile</a></li>
-                              <li><a href="shop-product-list.html">Tablet</a></li>
-                              <li><a href="shop-product-list.html">Hard disks</a></li>
-                              <li><a href="shop-product-list.html">Television</a></li>
-                              <li><a href="shop-product-list.html">Headphones</a></li>
-                              <li><a href="shop-product-list.html">Cameras</a></li>
+                              <li><a href="/Electronics">PC</a></li>
+                              <li><a href="/Electronics">Laptop</a></li>
+                              <li><a href="/Electronics">Mobile</a></li>
+                              <li><a href="/Electronics">Tablet</a></li>
+                              <li><a href="/Electronics">Hard disks</a></li>
+                              <li><a href="/Electronics">Television</a></li>
+                              <li><a href="/Electronics">Headphones</a></li>
+                              <li><a href="/Electronics">Cameras</a></li>
                             </ul>
                           </div>
                         </div>
@@ -135,16 +135,16 @@ export const Header = () => {
                 </li>
 
                 <li className="dropdown dropdown-megamenu">
-                  <a className="navbar-link" data-target="#" href="javascript:">
+                  <a className="navbar-link" data-target="#" href="/cosmatics">
                     Cosmatics
                   </a>
 
                   <ul className="dropdown-menu">
-                    <li><a href="shop-index.html">Makeup</a></li>
-                    <li className="active"><a href="shop-index-header-fix.html">Self care</a></li>
-                    <li><a href="shop-index-light-footer.html">Hair care</a></li>
-                    <li><a href="shop-product-list.html">Skin care</a></li>
-                    <li><a href="shop-search-result.html">Perfume</a></li>
+                    <li><a href="/cosmatics">Makeup</a></li>
+                    <li><a href="/cosmatics">Self care</a></li>
+                    <li><a href="/cosmatics">Hair care</a></li>
+                    <li><a href="/cosmatics">Skin care</a></li>
+                    <li><a href="/cosmatics">Perfume</a></li>
                   </ul>
                 </li>
                 <li className="dropdown-megamenu">
